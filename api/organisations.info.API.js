@@ -1,16 +1,25 @@
 let DBManager = require('../database-api/dbAPI');
-let CSVReader = require('../csv.reader');
+let CSVReader = require('../readers/csv.reader');
 const fs = require("fs");
 
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party";
 const token = "КЛЮЧ";
-const INNFILENAME = "./resources/inn/tmp.csv"
-//const INNFILENAME = "./resources/inn/inn-no-dublicates-reduced.csv"
-//const INNFILENAME = "./resources/inn/inn-reduced.csv"
-//const INNFILENAME = "./resources/inn/inn.csv"
 
 //const inn = "6950161416";
+//"use strict";
+class OrganisationsInfoAPI{
+    getOrgInfoFromInnFile(INNFILENAME){
+        let inns = CSVReader.getINNFromFile(INNFILENAME)
+        console.log(inns)
+        inns.forEach(inn => fillOrgInfo(inn))
+    }
+    makeBackups(){
+        let DBM = new DBManager();
+        DBM.makeBackUps();
+    }
+}
+module.exports = OrganisationsInfoAPI
 
 function fillOrgInfo(inn) {
     var fullQuery = {
@@ -30,9 +39,6 @@ function fillOrgInfo(inn) {
     makeXHRRequest(options, url);
 }
 
-let inns = CSVReader.getINNFromFile(INNFILENAME)
-console.log(inns)
-inns.forEach(inn => fillOrgInfo(inn))
 
 function makeXHRRequest(options, url){
     var xhr = new XMLHttpRequest();
@@ -83,3 +89,5 @@ function processResponse(response){
     let DBM = new DBManager();
     DBM.addOrgInfo(response.data);
 }
+
+

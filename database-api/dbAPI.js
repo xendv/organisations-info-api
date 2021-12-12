@@ -1,3 +1,4 @@
+const { exec } = require('child_process');
 const DBCONNOPTIONS = {
     user: 'postgres',
     host: '127.0.0.1',
@@ -7,7 +8,7 @@ const DBCONNOPTIONS = {
 }
 const { Client } = require('pg');
 
-"use strict";
+//"use strict";
 class DBManager{
 
     client = new Client(DBCONNOPTIONS);
@@ -44,38 +45,37 @@ class DBManager{
             (err, res) => {
                 if (err) {
                     console.error(err);
-                    return;
                 }
             });
     }
 
+    // not ready
     addOrgCoordInfo(inn, lat, lon){
         const ADD_COORD_QUERY = `UPDATE info SET lat=${lat}, lon=${lon}) ` +
-        `WHERE inn=${inn});`;
+        `WHERE inn='${inn}');`;
         this.client.query(ADD_COORD_QUERY,
             (err, res) => {
                 if (err) {
                     console.error(err);
-                    return;
                 }
             });
     }
 
-    makeBackUp(){
-        this.client.query(`\copy (Select * From info) To '/tmp/info.csv' With CSV`,
-            (err, res) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
-        this.client.query(`\copy (Select * From region_info) To '/tmp/info.csv' With CSV`,
-            (err, res) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
+    makeBackUps(){
+        // save info in csv
+        const os = require("os");
+        const tempDir = os.tmpdir();
+
+        // save db backup
+        const db = `pg_dump -U postgres -F c opk_db > backups/tmp/opk_db_dump.backup`
+        executeCommand(db)
+
+        // save tables as sql
+        const INFO = `pg_dump --host localhost --port 5432 --username postgres --format plain --verbose --file backups/tmp/info.sql --table public.info opk_db`
+        const REGIONS = `pg_dump --host localhost --port 5432 --username postgres --format plain --verbose --file backups/tmp/region_info.sql --table public.region_info opk_db`
+
+        executeCommand(INFO)
+        executeCommand(REGIONS)
     }
 
     closeDBConn(){
@@ -86,10 +86,32 @@ class DBManager{
         client.query(`TRUNCATE TABLE info;`, (err, res) => {
             if (err) {
                 console.error(err);
-                return;
             }
         });
     }
-}
 
+}
 module.exports = DBManager
+
+const executeCommand = (cmd, successCallback, errorCallback) => {
+    exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+            // console.log(`error: ${error.message}`);
+            if (errorCallback) {
+                errorCallback(error.message);
+            }
+            return;
+        }
+        if (stderr) {
+            //console.log(`stderr: ${stderr}`);
+            if (errorCallback) {
+                errorCallback(stderr);
+            }
+            return;
+        }
+        //console.log(`stdout: ${stdout}`);
+        if (successCallback) {
+            successCallback(stdout);
+        }
+    });
+};

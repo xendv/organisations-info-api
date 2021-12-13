@@ -1,0 +1,231 @@
+"C:\Program Files\nodejs\node.exe" C:\Users\xendv\WebstormProjects\organisations-info-api\app.js
+ИНН 6673246400
+VALUE ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"
+Mon Dec 13 2021 15:46:07 GMT+0300 (Москва, стандартное время)--------------------------   
+ИНН: 6673246400
+НАЗВАНИЕ (VALUE): ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"
+ПОЛНОЕ ИМЯ: ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"
+КОРОТКОЕ ИМЯ: ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"
+ОКАТО: null
+АДРЕС: 620017, Свердловская обл, г Екатеринбург, пр-кт Космонавтов, д 18
+--------------------------
+
+{
+  value: 'ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+  unrestricted_value: 'ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+  data: {
+    kpp: '668601001',
+    capital: null,
+    management: {
+      name: 'Рыбаков Евгений Александрович',
+      post: 'Ликвидатор',
+      disqualified: null
+    },
+    founders: null,
+    managers: null,
+    predecessors: null,
+    successors: null,
+    branch_type: 'MAIN',
+    branch_count: 0,
+    source: null,
+    qc: null,
+    hid: '15b46a66045d7c298009f037206658021b8993638f675b947d5d6e4fd46d0099',
+    type: 'LEGAL',
+    state: {
+      status: 'LIQUIDATED',
+      code: '201',
+      actuality_date: 1614556800000,
+      registration_date: 1316044800000,
+      liquidation_date: 1614556800000
+    },
+    opf: {
+      type: '2014',
+      code: '12300',
+      full: 'Общество с ограниченной ответственностью',
+      short: 'ООО'
+    },
+    name: {
+      full_with_opf: 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+      short_with_opf: 'ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+      latin: null,
+      full: 'СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ',
+      short: 'СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ'
+    },
+    inn: '6673246400',
+    ogrn: '1116673014897',
+    okpo: null,
+    okato: null,
+    oktmo: null,
+    okogu: null,
+    okfs: null,
+    okved: '72.19',
+    okveds: null,
+    authorities: null,
+    documents: null,
+    licenses: null,
+    finance: null,
+    address: {
+      value: 'г Екатеринбург, пр-кт Космонавтов, д 18',
+      unrestricted_value: '620017, Свердловская обл, г Екатеринбург, пр-кт Космонавтов, д 18',
+      data: [Object]
+    },
+    phones: null,
+    emails: null,
+    ogrn_date: 1316044800000,
+    okved_type: '2014',
+    employee_count: null
+  }
+}
+
+
+DATA:
+{
+  kpp: '668601001',
+  capital: null,
+  management: {
+    name: 'Рыбаков Евгений Александрович',
+    post: 'Ликвидатор',
+    disqualified: null
+  },
+  founders: null,
+  managers: null,
+  predecessors: null,
+  successors: null,
+  branch_type: 'MAIN',
+  branch_count: 0,
+  source: null,
+  qc: null,
+  hid: '15b46a66045d7c298009f037206658021b8993638f675b947d5d6e4fd46d0099',
+  type: 'LEGAL',
+  state: {
+    status: 'LIQUIDATED',
+    code: '201',
+    actuality_date: 1614556800000,
+    registration_date: 1316044800000,
+    liquidation_date: 1614556800000
+  },
+  opf: {
+    type: '2014',
+    code: '12300',
+    full: 'Общество с ограниченной ответственностью',
+    short: 'ООО'
+  },
+  name: {
+    full_with_opf: 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+    short_with_opf: 'ООО "СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ"',
+    latin: null,
+    full: 'СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ',
+    short: 'СОВРЕМЕННЫЕ ПРОМЫШЛЕННЫЕ ТЕХНОЛОГИИ'
+  },
+  inn: '6673246400',
+  ogrn: '1116673014897',
+  okpo: null,
+  okato: null,
+  oktmo: null,
+  okogu: null,
+  okfs: null,
+  okved: '72.19',
+  okveds: null,
+  authorities: null,
+  documents: null,
+  licenses: null,
+  finance: null,
+  address: {
+    value: 'г Екатеринбург, пр-кт Космонавтов, д 18',
+    unrestricted_value: '620017, Свердловская обл, г Екатеринбург, пр-кт Космонавтов, д 18',
+    data: {
+      postal_code: '620017',
+      country: 'Россия',
+      country_iso_code: 'RU',
+      federal_district: 'Уральский',
+      region_fias_id: '92b30014-4d52-4e2e-892d-928142b924bf',
+      region_kladr_id: '6600000000000',
+      region_iso_code: 'RU-SVE',
+      region_with_type: 'Свердловская обл',
+      region_type: 'обл',
+      region_type_full: 'область',
+      region: 'Свердловская',
+      area_fias_id: null,
+      area_kladr_id: null,
+      area_with_type: null,
+      area_type: null,
+      area_type_full: null,
+      area: null,
+      city_fias_id: '2763c110-cb8b-416a-9dac-ad28a55b4402',
+      city_kladr_id: '6600000100000',
+      city_with_type: 'г Екатеринбург',
+      city_type: 'г',
+      city_type_full: 'город',
+      city: 'Екатеринбург',
+      city_area: null,
+      city_district_fias_id: null,
+      city_district_kladr_id: null,
+      city_district_with_type: null,
+      city_district_type: null,
+      city_district_type_full: null,
+      city_district: null,
+      settlement_fias_id: null,
+      settlement_kladr_id: null,
+      settlement_with_type: null,
+      settlement_type: null,
+      settlement_type_full: null,
+      settlement: null,
+      street_fias_id: '88063325-91c5-4f55-9345-a196f4338e51',
+      street_kladr_id: '66000001000052200',
+      street_with_type: 'пр-кт Космонавтов',
+      street_type: 'пр-кт',
+      street_type_full: 'проспект',
+      street: 'Космонавтов',
+      house_fias_id: '0b829dde-8181-4974-9c01-1612f8b51f78',
+      house_kladr_id: '6600000100005220027',
+      house_cadnum: null,
+      house_type: 'д',
+      house_type_full: 'дом',
+      house: '18',
+      block_type: null,
+      block_type_full: null,
+      block: null,
+      entrance: null,
+      floor: null,
+      flat_fias_id: null,
+      flat_cadnum: null,
+      flat_type: null,
+      flat_type_full: null,
+      flat: null,
+      flat_area: '11.6',
+      square_meter_price: null,
+      flat_price: null,
+      postal_box: null,
+      fias_id: '0b829dde-8181-4974-9c01-1612f8b51f78',
+      fias_code: '66000001000000005220027',
+      fias_level: '8',
+      fias_actuality_state: '99',
+      kladr_id: '6600000100005220027',
+      geoname_id: '1486209',
+      capital_marker: '2',
+      okato: '65401000000',
+      oktmo: '65701000',
+      tax_office: '6686',
+      tax_office_legal: '6686',
+      timezone: 'UTC+5',
+      geo_lat: '56.8718416',
+      geo_lon: '60.6121823',
+      beltway_hit: null,
+      beltway_distance: null,
+      metro: [Array],
+      qc_geo: '0',
+      qc_complete: null,
+      qc_house: null,
+      history_values: null,
+      unparsed_parts: null,
+      source: '620091, ОБЛАСТЬ СВЕРДЛОВСКАЯ, Г. ЕКАТЕРИНБУРГ, ПР-КТ КОСМОНАВТОВ, Д. 18',
+      qc: '0'
+    }
+  },
+  phones: null,
+  emails: null,
+  ogrn_date: 1316044800000,
+  okved_type: '2014',
+  employee_count: null
+}
+Saved to log!

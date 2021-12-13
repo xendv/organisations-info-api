@@ -1,2 +1,7 @@
 242009683 -
-Cannot read properties of undefined (reading 'data')
+Cannot read properties of undefined (reading 'data') (так как пропущен 0 в начале, у инн должно быть 10 цифр)
+
+3443073324 - (около 300 номера), не все добавились
+с 421 по 490 - не все (включительно, не добавилось 13)
+
+список inn-final просмотрен до 7729711005 (строка 790)

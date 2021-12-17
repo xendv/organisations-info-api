@@ -103,7 +103,7 @@ class DBManager{
             console.log("No such table in db");
             return;
         }
-        client.query(`TRUNCATE TABLE ${table};`, (err, res) => {
+        this.client.query(`TRUNCATE TABLE ${table};`, (err, res) => {
             if (err) {
                 console.error(err);
             }

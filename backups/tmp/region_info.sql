@@ -5,7 +5,7 @@
 -- Dumped from database version 13.3
 -- Dumped by pg_dump version 13.3
 
--- Started on 2021-12-13 17:46:05
+-- Started on 2021-12-17 22:40:10
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 201 (class 1259 OID 107136)
+-- TOC entry 201 (class 1259 OID 107185)
 -- Name: region_info; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -36,7 +36,7 @@ CREATE TABLE public.region_info (
 ALTER TABLE public.region_info OWNER TO postgres;
 
 --
--- TOC entry 2984 (class 0 OID 107136)
+-- TOC entry 2984 (class 0 OID 107185)
 -- Dependencies: 201
 -- Data for Name: region_info; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -128,7 +128,7 @@ COPY public.region_info (code, name) FROM stdin;
 
 
 --
--- TOC entry 2853 (class 2606 OID 107145)
+-- TOC entry 2853 (class 2606 OID 107194)
 -- Name: region_info region_info_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -136,7 +136,7 @@ ALTER TABLE ONLY public.region_info
     ADD CONSTRAINT region_info_pkey PRIMARY KEY (code);
 
 
--- Completed on 2021-12-13 17:46:05
+-- Completed on 2021-12-17 22:40:10
 
 --
 -- PostgreSQL database dump complete

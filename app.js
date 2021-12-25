@@ -1,7 +1,6 @@
 let OrganisationsInfoAPI = require('./api/organisations.info.API');
 
-const INNFILENAME = "./resources/inn/one_inn.csv"
-//const INNFILENAME = "./resources/inn/tmp.csv"
+const INNFILENAME = "./resources/inn/inn-final.csv"
 
 const inn = "3443073324";
 

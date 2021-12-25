@@ -5,6 +5,11 @@ const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party";
 const token = "КЛЮЧ";
 
+let DBM = new DBManager();
+let counter = 0;
+let inns;
+let timerID;
+
 class OrganisationsInfoAPI{
 
     getInnsFromFile(INNFILENAME){
@@ -16,8 +21,8 @@ class OrganisationsInfoAPI{
     }
 
     getOrgInfoFromInnFile(INNFILENAME){
-        let inns = this.getInnsFromFile(INNFILENAME)
-        inns.forEach(inn => fillOrgInfo(inn));
+        inns = this.getInnsFromFile(INNFILENAME)
+        timerID = setInterval(fillOrgInfo, 200);
     }
 
     getOneOrgInfoFromAPI(inn){
@@ -42,8 +47,9 @@ function getOrgInfo(inn){
     return makeXHRRequest(makeQueryOptionsToAPI(inn), url, 'getOrgInfo');
 }
 
-function fillOrgInfo(inn) {
-    makeXHRRequest(makeQueryOptionsToAPI(inn), url, 'addToDB');
+function fillOrgInfo() {
+    if (counter === inns.length-1) clearInterval(timerID);
+    else makeXHRRequest(makeQueryOptionsToAPI(inns[counter]), url, 'addToDB');
 }
 
 function makeQueryOptionsToAPI(inn){
@@ -64,14 +70,18 @@ function makeQueryOptionsToAPI(inn){
 }
 
 
-function makeXHRRequest(options, url, onResult){
+async function makeXHRRequest(options, url, onResult) {
     var xhr = new XMLHttpRequest();
     xhr.open(options.method, url, true);
     // set all headers
-    for (var item in options.headers){
+    for (var item in options.headers) {
         xhr.setRequestHeader(item, options.headers[item]);
     }
+
     xhr.send(options.body);
+
+    counter++;
+
     xhr.onload = () => {
         // print JSON response
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -95,7 +105,6 @@ function processResponse(response, onResult){
             return response;
         case 'addToDB':
             //logOrgInfoToFile(response)
-            let DBM = new DBManager();
             DBM.addOrgInfo(response.data);
             break
         default:

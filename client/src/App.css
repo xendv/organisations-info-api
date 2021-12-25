@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -21,11 +22,23 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+html, body, .App, .Аpp>div {
+  height: 100% !important;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+#map{
+  height: 100% !important;
 }
 
 @keyframes App-logo-spin {

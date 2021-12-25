@@ -2,17 +2,27 @@
   text-align: center;
 }
 
-body {
-  background-color: #fbfbfb;
-}
 @media (min-width: 991.98px) {
   main {
     padding-left: 240px;
   }
 }
+html, body, .App, .Аpp>div {
+  height: 100% !important;
+}
 
-body {
-  padding-top: 80px;
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+#map{
+  height: 100% !important;
+}
+
+.fullscreen {
+  height: 100%;
+  width: 100%;
 }
 
 /*
@@ -79,7 +89,6 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {

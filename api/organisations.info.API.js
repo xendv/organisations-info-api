@@ -30,12 +30,10 @@ class OrganisationsInfoAPI{
     }
 
     makeBackups(){
-        let DBM = new DBManager();
         DBM.makeBackUps();
     }
 
     getRegionsStatistics(){
-        let DBM = new DBManager();
         DBM.getRegionsStatistics(rows => {
             console.log(rows);
         });
@@ -46,7 +44,6 @@ class OrganisationsInfoAPI{
     }
 
     async getTotalCount(){
-        let DBM = new DBManager();
         return await DBM.getTotalCount()
     }
 }

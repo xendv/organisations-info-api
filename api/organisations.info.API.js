@@ -40,6 +40,15 @@ class OrganisationsInfoAPI{
             console.log(rows);
         });
     }
+
+    async getRegionInfo(name){
+        return await DBM.getRegionsStatistics(name)
+    }
+
+    async getTotalCount(){
+        let DBM = new DBManager();
+        return await DBM.getTotalCount()
+    }
 }
 module.exports = OrganisationsInfoAPI
 

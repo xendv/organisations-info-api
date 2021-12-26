@@ -15,12 +15,15 @@ import VectorLayer from "ol/layer/Vector";
 import {toStringHDMS} from 'ol/coordinate';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import loadData from './API.js'
 
 //fromLonLat([62.379743469899715, 93.41872459573818])
 
 class DataMap extends Component {
   constructor(props) {
     super(props);
+
+    this.baseUrl = "http://127.0.0.1:5000/api";
 
     this.state = { 
       center: [
@@ -36,13 +39,7 @@ class DataMap extends Component {
     this.olmap = new Map({
       target: null,
       layers: [
-        new VectorLayer({
-          source: new Vector({
-            format: new GeoJSON(),
-            url: "https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/russia.geojson"
-          }),
-          style: this.fillStyle
-      })
+        this.geoLayer
       ],
       view: new View({
         center: this.state.center,
@@ -60,8 +57,6 @@ class DataMap extends Component {
   handleOpen = () => {
     this.setState({isOpened: true});
   };
-
-
 
   fillStyle = function(feature) {
     var colors = {
@@ -89,7 +84,23 @@ class DataMap extends Component {
     this.olmap.getView().setZoom(this.state.zoom);
   }
 
+  geoLayer = new VectorLayer({
+    source: new Vector({
+      format: new GeoJSON(),
+      url: "http://127.0.0.1:5000/data/geojson/"
+    }),
+    style: this.fillStyle
+  })
+
+  async updateFeatures(){
+    let res = await loadData(this.baseUrl + "/get_total_count");
+    console.log(res);
+    this.total_count = res.data.orgs_count;
+    this.region_data = await loadData(this.baseUrl + "/get_region_info");
+  }
+
   componentDidMount() {
+    this.updateFeatures();
     this.handleClose();
     this.olmap.setTarget("map");
     this.popup = new Overlay({
@@ -121,11 +132,11 @@ class DataMap extends Component {
           var newColor = Color(newStyle.getFill().getColor()).lighten(0.1).hex();
           newStyle.getFill().setColor(newColor);
           feature.setStyle(newStyle);
-
+          //console.log(feature.getProperties());
           const coordinate = e.coordinate;
           const hdms = toStringHDMS(toLonLat(coordinate));
           this.handleOpen();
-          this.setState({hint: this.createDynamicHint(feature)});
+          this.loadFeatureHintData(feature);
         } else {
           this.handleClose()
         }
@@ -134,15 +145,27 @@ class DataMap extends Component {
     });
   }
 
-  createDynamicHint(feature){
+  loadFeatureHintData(feature){
+    loadData(this.baseUrl + "/get_region_info", {
+      reg_name: feature.getProperties().full_name
+    }, (response) => {
+      this.setState({hint: this.createDynamicHint(feature, response.data[0])});
+    })
+  }
+
+  createDynamicHint(feature, data){
     return(
       <React.Fragment>
-        <Typography color="" variant="body1">{feature.getProperties().name}</Typography>
-        <em>{"Количество предприятий ОПК в регионе:"}</em> <b>{'300'}</b>.
+        <Typography color="" variant="body1">{feature.getProperties().full_name}</Typography>
+        <em>{"Количество предприятий ОПК в регионе:"}</em> <b>{data.orgs_count}</b>.
         <br></br>
-        <u>{'Плотность размещения: '}</u> <b><u>{'10%'}</u></b>
+        <u>{'Плотность размещения: '}</u> <b><u>{this.getPercent(data.orgs_count,this.total_count) + '%'}</u></b>
       </React.Fragment>
     )
+  }
+
+  getPercent(a,b){
+    return Math.floor(parseInt(a)/parseInt(b)*100 * 100) / 100;
   }
 
   shouldComponentUpdate(nextProps, nextState) {

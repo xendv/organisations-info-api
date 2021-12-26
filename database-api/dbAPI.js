@@ -50,17 +50,35 @@ class DBManager{
             });
     }
 
-    getRegionsStatistics(callback) {
-        const REGIONS_STATISTICS_QUERY = `SELECT region_info.*, COUNT(info.region_code) AS orgs_count ` +
+    async getRegionsStatistics(name) {
+        let where = "";
+        if (name) where = `WHERE region_info.name = '${name}'`;
+        let REGIONS_STATISTICS_QUERY = `SELECT region_info.*, COUNT(info.region_code) AS orgs_count ` +
             `FROM region_info ` +
             `LEFT JOIN info ON region_info.code = info.region_code ` +
+            `${where} ` +
             `GROUP BY region_info.code ` +
-            `ORDER BY code`;
+            `ORDER BY code `;
+        console.log(REGIONS_STATISTICS_QUERY);
 
-        this.client.query(REGIONS_STATISTICS_QUERY)
+        return await this.client.query(REGIONS_STATISTICS_QUERY)
             .then(res =>{
                 console.log(res.rows);
-                return callback(res.rows);
+                return res.rows;
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    async getTotalCount() {
+        let REGIONS_STATISTICS_QUERY = `SELECT COUNT(*) AS orgs_count FROM info`;
+        console.log(REGIONS_STATISTICS_QUERY);
+
+        return await this.client.query(REGIONS_STATISTICS_QUERY)
+            .then(res =>{
+                console.log(res.rows);
+                return res.rows;
             })
             .catch(err => {
                 console.log(err);

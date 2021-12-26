@@ -16,6 +16,7 @@ import {toStringHDMS} from 'ol/coordinate';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import loadData from './API.js'
+import { colors } from '@mui/material';
 
 //fromLonLat([62.379743469899715, 93.41872459573818])
 
@@ -35,6 +36,14 @@ class DataMap extends Component {
       isOpened: true,
       hint: ""
     };
+
+    this.geoLayer = new VectorLayer({
+      source: new Vector({
+        format: new GeoJSON(),
+        url: "http://127.0.0.1:5000/data/geojson/"
+      }),
+      style: this.fillStyle
+    })
 
     this.olmap = new Map({
       target: null,
@@ -58,19 +67,12 @@ class DataMap extends Component {
     this.setState({isOpened: true});
   };
 
-  fillStyle = function(feature) {
-    var colors = {
-        0: '#fff33b',
-        1: '#fdc70c',
-        2: '#f3903f',
-        3: '#ed683c',
-        4: '#e93e3a',
-    };
+  fillStyle = (feature) => {
     //console.log()
-    var selector = feature.getProperties().cartodb_id % 5
+    let color = this.colorByDensity(feature);
     return [new Style({
       fill: new Fill({
-        color: colors[selector],
+        color: color,
       }),
       stroke: new Stroke({
         color: "#303030",
@@ -79,24 +81,43 @@ class DataMap extends Component {
     })]
   };
 
+  colorByDensity(feature){
+    var colors = {
+      0: '#fff33b',
+      1: '#fdc70c',
+      2: '#f3903f',
+      3: '#ed683c',
+      4: '#e93e3a',
+  };
+    var result = this.region_data.data.filter(obj => {
+      return obj.name === feature.getProperties().full_name;
+    })
+    if (!result[0]) {
+      console.log(feature.getProperties().full_name);
+      return '#808080'; // undefined
+    }
+    else {
+      var density = this.getPercent(result[0].orgs_count,this.total_count)
+      let selector = 0
+      if (density > 8) selector = 4 
+      else if (density > 4) selector = 3
+      else if (density > 1) selector = 2
+      else if (density > 0) selector = 1
+      return colors[selector]
+    }
+  }
+
   updateMap() {
     this.olmap.getView().setCenter(this.state.center);
     this.olmap.getView().setZoom(this.state.zoom);
   }
 
-  geoLayer = new VectorLayer({
-    source: new Vector({
-      format: new GeoJSON(),
-      url: "http://127.0.0.1:5000/data/geojson/"
-    }),
-    style: this.fillStyle
-  })
-
   async updateFeatures(){
     let res = await loadData(this.baseUrl + "/get_total_count");
-    console.log(res);
+    //console.log(res);
     this.total_count = res.data.orgs_count;
     this.region_data = await loadData(this.baseUrl + "/get_region_info");
+    //console.log(this.region_data);
   }
 
   componentDidMount() {
@@ -160,6 +181,8 @@ class DataMap extends Component {
         <em>{"Количество предприятий ОПК в регионе:"}</em> <b>{data.orgs_count}</b>.
         <br></br>
         <u>{'Плотность размещения: '}</u> <b><u>{this.getPercent(data.orgs_count,this.total_count) + '%'}</u></b>
+        <br></br>
+        {feature.getProperties().geo_preview}
       </React.Fragment>
     )
   }
